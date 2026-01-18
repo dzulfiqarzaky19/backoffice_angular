@@ -73,13 +73,13 @@ describe('PasswordComponent', () => {
     fixture.componentRef.setInput('showForgotPassword', true);
     fixture.detectChanges();
 
-    const link = fixture.debugElement.query(By.css('.forgot-link'));
+    const link = fixture.debugElement.query(By.css('.forgot-link-wrapper'));
     expect(link).toBeTruthy();
     expect(link.nativeElement.textContent).toContain('Forgot password?');
   });
 
   it('should NOT show forgot password link whenever disabled (default)', () => {
-    const link = fixture.debugElement.query(By.css('.forgot-link'));
+    const link = fixture.debugElement.query(By.css('.forgot-link-wrapper'));
     expect(link).toBeFalsy();
   });
 
