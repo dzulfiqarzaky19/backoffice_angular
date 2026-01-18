@@ -1,0 +1,26 @@
+<div class="form-group">
+  @if (label()) {
+    <app-typography variant="label" [attr.for]="id">{{ label() }}</app-typography>
+  }
+  <div class="input-wrapper">
+    <input
+      [id]="id"
+      type="text"
+      [attr.list]="listId"
+      [placeholder]="placeholder()"
+      [value]="value"
+      [disabled]="disabled"
+      [class.error]="hasError"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+    />
+    <datalist [id]="listId">
+      @for (option of options(); track option) {
+        <option [value]="option"></option>
+      }
+    </datalist>
+  </div>
+  @if (hasError) {
+    <app-typography variant="error" class="error-msg">{{ getErrorMessage() }}</app-typography>
+  }
+</div>

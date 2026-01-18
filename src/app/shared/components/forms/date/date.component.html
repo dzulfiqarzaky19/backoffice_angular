@@ -1,0 +1,19 @@
+<div class="form-group">
+  @if (label()) {
+    <app-typography variant="label" [attr.for]="id">{{ label() }}</app-typography>
+  }
+  <div class="input-wrapper">
+    <input
+      [id]="id"
+      type="date"
+      [value]="value"
+      [disabled]="disabled"
+      [class.error]="hasError"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+    />
+  </div>
+  @if (hasError) {
+    <app-typography variant="error" class="error-msg">{{ getErrorMessage() }}</app-typography>
+  }
+</div>

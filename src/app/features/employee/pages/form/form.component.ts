@@ -11,6 +11,14 @@ import {
 } from '@angular/forms';
 import { Employee, EmployeeGroup, EmployeeStatus } from '../../../../shared/models/employee.model';
 import { DatePipe } from '@angular/common';
+import { TextComponent } from '../../../../shared/components/forms/text/text.component';
+import { EmailComponent } from '../../../../shared/components/forms/email/email.component';
+import { DateComponent } from '../../../../shared/components/forms/date/date.component';
+import { NumberComponent } from '../../../../shared/components/forms/number/number.component';
+import { SelectComponent } from '../../../../shared/components/forms/select/select.component';
+import { SearchComponent } from '../../../../shared/components/forms/search/search.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { TypographyComponent } from '../../../../shared/components/typography/typography.component';
 
 export function isInListValidator(allowedValues: readonly string[]): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -29,7 +37,17 @@ export function isValidDateValidator(): ValidatorFn {
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    TextComponent,
+    EmailComponent,
+    DateComponent,
+    NumberComponent,
+    SelectComponent,
+    SearchComponent,
+    ButtonComponent,
+    TypographyComponent
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
   providers: [DatePipe],
