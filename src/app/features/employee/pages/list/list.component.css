@@ -1,0 +1,9 @@
+.employee {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
