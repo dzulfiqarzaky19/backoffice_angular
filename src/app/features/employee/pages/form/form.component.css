@@ -15,7 +15,7 @@
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
@@ -92,7 +92,6 @@ select.ng-invalid.ng-dirty {
   background-color: #fffafb;
 }
 
-/* Optional: focus state when invalid */
 input.ng-invalid.ng-dirty:focus {
   outline: 2px solid rgba(220, 38, 38, 0.2);
 }
