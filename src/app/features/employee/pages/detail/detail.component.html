@@ -1,1 +1,16 @@
-<p>detail works!</p>
+@if(employee()) {
+    <div>
+        <p>{{ employee()?.username }}</p>
+        <p>{{ employee()?.firstName }}</p>
+        <p>{{ employee()?.lastName }}</p>
+        <p>{{ employee()?.email }}</p>
+        <p>{{ employee()?.birthDate }}</p>
+        <p>{{ employee()?.basicSalary }}</p>
+        <p>{{ employee()?.status }}</p>
+        <p>{{ employee()?.group }}</p>
+        <p>{{ employee()?.description }}</p>
+    </div>
+} @else {
+    <p>Employee not found</p>
+}
+

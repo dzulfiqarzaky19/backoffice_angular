@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { EmployeeService } from '../../../../core/services/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -8,6 +9,7 @@ import { EmployeeService } from '../../../../core/services/employee.service';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
+  router = inject(Router);
   employeeService = inject(EmployeeService);
   employees = this.employeeService.allEmployees;
 
@@ -17,12 +19,10 @@ export class ListComponent {
   }
 
   handleEdit(username: string) {
-    const employee = this.employeeService.getEmployeeByUsername(username)
-    console.log(employee)
+    this.router.navigate(['dashboard/employee/edit', username])
   }
 
   handleDetail(username: string) {
-    const employee = this.employeeService.getEmployeeByUsername(username)
-    console.log(employee)
+    this.router.navigate(['dashboard/employee/detail', username])
   }
 }

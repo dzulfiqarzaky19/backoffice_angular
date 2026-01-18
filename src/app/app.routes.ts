@@ -25,11 +25,11 @@ export const routes: Routes = [
                         loadComponent: () => import('./features/employee/pages/form/form.component').then(m => m.FormComponent)
                     },
                     {
-                        path: 'edit/:id',
+                        path: 'edit/:username',
                         loadComponent: () => import('./features/employee/pages/form/form.component').then(m => m.FormComponent)
                     },
                     {
-                        path: 'detail/:id',
+                        path: 'detail/:username',
                         loadComponent: () => import('./features/employee/pages/detail/detail.component').then(m => m.DetailComponent)
                     }
                 ]
