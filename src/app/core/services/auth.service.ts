@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private readonly router = inject(Router);
 
-  private readonly currentUser = signal<string | null>(localStorage.getItem('user_session'));
+  readonly currentUser = signal<string | null>(localStorage.getItem('user_session'));
 
   readonly isLoggedIn = computed(() => !!this.currentUser());
 
@@ -25,9 +25,5 @@ export class AuthService {
     this.currentUser.set(null);
     localStorage.removeItem('user_session');
     this.router.navigate(['/login']);
-  }
-
-  getCurrentUser(): string | null {
-    return this.currentUser();
   }
 }

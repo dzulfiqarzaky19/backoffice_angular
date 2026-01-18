@@ -1,1 +1,22 @@
-<p>header works!</p>
+<header class="main-header">
+  <div class="header-left">
+    <span class="page-title">Management System</span>
+  </div>
+
+  <div class="header-right">
+    <div class="user-profile">
+      <div class="user-info">
+        <span class="username">{{ currentUser() }}</span>
+        <span class="role">Administrator</span>
+      </div>
+      <div class="user-avatar">
+        {{ currentUser()?.charAt(0) }}
+      </div>
+    </div>
+
+    <button class="btn-logout" (click)="onLogout()" title="Logout">
+      <span class="logout-icon">⎋</span>
+      Logout
+    </button>
+  </div>
+</header>
