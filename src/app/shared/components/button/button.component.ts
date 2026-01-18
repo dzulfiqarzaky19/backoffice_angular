@@ -9,6 +9,7 @@ import { Component, input } from '@angular/core';
 })
 export class ButtonComponent {
   type = input<'button' | 'submit' | 'reset'>('button');
+  variant = input<'primary' | 'secondary' | 'danger' | 'ghost' | 'ghost-danger'>('primary');
   disabled = input(false);
   fullWidth = input(false);
 }

@@ -1,59 +1,99 @@
 <div class="detail-container">
-  <div class="detail-header">
-    <button class="btn-back" [routerLink]="['/dashboard/employee']">← Back to List</button>
-    <div class="header-actions">
-      <button class="btn-edit" [routerLink]="['/dashboard/employee/edit', employee()?.username]">
-        Edit Profile
-      </button>
+  <div class="page-header">
+    <a [routerLink]="['/dashboard/employee']" class="back-link">
+      <lucide-icon [img]="ArrowLeft" size="16"></lucide-icon>
+      <app-typography variant="label" style="cursor: pointer; color: inherit"
+        >Back to List</app-typography
+      >
+    </a>
+
+    <div class="header-content">
+      <div class="header-title-section">
+        @if (employee(); as emp) {
+          <div class="header-avatar">{{ emp.firstName[0] }}{{ emp.lastName[0] }}</div>
+          <div>
+            <app-typography variant="h2">{{ emp.firstName }} {{ emp.lastName }}</app-typography>
+            <div class="status-wrapper">
+              <app-typography variant="caption" [style.color]="'var(--text-muted)'">
+                {{ emp.username }} •
+                <span [attr.data-status]="emp.status" class="status-text">{{ emp.status }}</span>
+              </app-typography>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="header-actions">
+        @if (employee(); as emp) {
+          <app-button [routerLink]="['/dashboard/employee/edit', emp.username]">
+            <lucide-icon [img]="Pencil" size="16"></lucide-icon>
+            Edit Profile
+          </app-button>
+        }
+      </div>
     </div>
   </div>
 
   @if (employee(); as emp) {
-    <div class="profile-card">
-      <div class="profile-sidebar">
-        <div class="avatar-placeholder">{{ emp.firstName[0] }}{{ emp.lastName[0] }}</div>
-        <h3>{{ emp.firstName }} {{ emp.lastName }}</h3>
-        <span class="status-badge" [attr.data-status]="emp.status">{{ emp.status }}</span>
+    <div class="content-grid">
+      <div class="info-card">
+        <div class="card-header">
+          <lucide-icon [img]="User" size="20" color="var(--primary)"></lucide-icon>
+          <app-typography variant="h3" color="var(--primary)">Personal Information</app-typography>
+        </div>
+
+        <div class="card-body">
+          <div class="info-group">
+            <app-typography variant="label">Email Address</app-typography>
+            <div class="value-row">
+              <lucide-icon [img]="Mail" size="16" class="icon-muted"></lucide-icon>
+              <app-typography variant="body">{{ emp.email }}</app-typography>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <app-typography variant="label">Birth Date</app-typography>
+            <div class="value-row">
+              <lucide-icon [img]="Calendar" size="16" class="icon-muted"></lucide-icon>
+              <app-typography variant="body">{{
+                emp.birthDate | date: 'mediumDate'
+              }}</app-typography>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="profile-info">
-        <section>
-          <h4>Personal Information</h4>
-          <div class="info-grid">
-            <div class="info-item">
-              <label>Username</label>
-              <p>{{ emp.username }}</p>
-            </div>
-            <div class="info-item">
-              <label>Email</label>
-              <p>{{ emp.email }}</p>
-            </div>
-            <div class="info-item">
-              <label>Birth Date</label>
-              <p>{{ emp.birthDate | date: 'mediumDate' }}</p>
+      <div class="info-card">
+        <div class="card-header">
+          <lucide-icon [img]="Briefcase" size="20" color="var(--primary)"></lucide-icon>
+          <app-typography variant="h3" color="var(--primary)">Employment Details</app-typography>
+        </div>
+
+        <div class="card-body">
+          <div class="info-group">
+            <app-typography variant="label">Group / Department</app-typography>
+            <div class="value-row">
+              <app-typography variant="body">{{ emp.group }}</app-typography>
             </div>
           </div>
-        </section>
 
-        <hr />
-
-        <section>
-          <h4>Employment Details</h4>
-          <div class="info-grid">
-            <div class="info-item">
-              <label>Group / Department</label>
-              <p>{{ emp.group }}</p>
-            </div>
-            <div class="info-item">
-              <label>Basic Salary</label>
-              <p>{{ emp.basicSalary | currency: 'IDR' : 'symbol' : '1.0-0' }}</p>
-            </div>
-            <div class="info-item">
-              <label>Effective Date (Description)</label>
-              <p>{{ emp.description | date: 'medium' }}</p>
+          <div class="info-group">
+            <app-typography variant="label">Basic Salary</app-typography>
+            <div class="value-row">
+              <lucide-icon [img]="CreditCard" size="16" class="icon-muted"></lucide-icon>
+              <app-typography variant="body">{{
+                emp.basicSalary | currency: 'IDR' : 'symbol' : '1.0-0'
+              }}</app-typography>
             </div>
           </div>
-        </section>
+
+          <div class="info-group">
+            <app-typography variant="label">Description / Date</app-typography>
+            <div class="value-row">
+              <app-typography variant="body">{{ emp.description | date: 'medium' }}</app-typography>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   }

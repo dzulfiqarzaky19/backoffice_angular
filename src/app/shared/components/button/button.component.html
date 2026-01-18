@@ -2,7 +2,7 @@
   [type]="type()"
   [disabled]="disabled()"
   [class.btn-full-width]="fullWidth()"
-  class="btn-primary"
+  [class]="'btn-' + variant()"
 >
   <ng-content></ng-content>
 </button>

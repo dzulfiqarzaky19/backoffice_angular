@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { TypographyComponent } from '../typography/typography.component';
 import { LucideAngularModule, LogOut, LayoutDashboard } from 'lucide-angular';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [TypographyComponent, LucideAngularModule],
+  imports: [TypographyComponent, LucideAngularModule, ButtonComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

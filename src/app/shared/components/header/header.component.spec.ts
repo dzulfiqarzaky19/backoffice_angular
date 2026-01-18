@@ -46,7 +46,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should call logout when logout button is clicked', () => {
-    const logoutBtn = fixture.debugElement.query(By.css('.btn-logout'));
+    const logoutBtn = fixture.debugElement.query(By.css('app-button'));
     logoutBtn.nativeElement.click();
     expect(authServiceSpy.logout).toHaveBeenCalled();
   });
