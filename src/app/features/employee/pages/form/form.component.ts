@@ -38,8 +38,8 @@ export class FormComponent {
 
   readonly username = computed(() => this.activatedRoute.snapshot.paramMap.get('username'));
   readonly employee = computed(() => this.employeeService.getEmployeeByUsername(this.username() || ''));
-  readonly groupsList = this.employeeService.groupsList;
-  readonly statusesList = this.employeeService.statusesList;
+  readonly groupList = this.employeeService.groupList;
+  readonly statusList = this.employeeService.statusList;
 
   constructor() {
     effect(() => {
@@ -66,8 +66,8 @@ export class FormComponent {
     email: ['', [Validators.required, Validators.email]],
     birthDate: ['', [Validators.required, isValidDateValidator()]],
     basicSalary: [0, [Validators.required, Validators.min(2000000)]],
-    status: ['', [Validators.required, isInListValidator(this.statusesList())]],
-    group: ['', [Validators.required, isInListValidator(this.groupsList())]],
+    status: ['', [Validators.required, isInListValidator(this.statusList())]],
+    group: ['', [Validators.required, isInListValidator(this.groupList())]],
     description: ['', [Validators.required]]
   });
 

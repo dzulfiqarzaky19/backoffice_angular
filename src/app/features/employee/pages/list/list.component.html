@@ -1,21 +1,86 @@
-<button (click)="handleAdd()">Add Employee</button>
+<div class="list-container">
+  <div class="list-header">
+    <h1>Employee List</h1>
+    <button class="btn-add" [routerLink]="['/dashboard/employee/add']">+ Add Employee</button>
+  </div>
 
-@for(employee of employees(); track employee.username) {
-    <div class="employee">
-        <p>{{ employee.username }}</p>
-        <p>{{ employee.firstName }}</p>
-        <p>{{ employee.lastName }}</p>
-        <p>{{ employee.email }}</p>
-        <p>{{ employee.birthDate }}</p>
-        <p>{{ employee.basicSalary }}</p>
-        <p>{{ employee.status }}</p>
-        <p>{{ employee.group }}</p>
-        <p>{{ employee.description }}</p>
+  <div class="table-actions">
+    <input 
+      type="text" 
+      placeholder="Search by name, username or email..." 
+      (input)="onSearch($event)"
+      class="search-input">
 
-        <div>
-            <button (click)="handleDetail(employee.username)">Detail</button>
-            <button (click)="handleEdit(employee.username)">Edit</button>
-            <button (click)="handleDelete(employee.username)">Delete</button>
-        </div>
-    </div>   
-}
+      <select (change)="onGroupFilter($event)" class="filter-select">
+    <option value="">All Groups</option>
+    @for (group of groupList(); track group) {
+      <option [value]="group">{{ group }}</option>
+    }
+  </select>
+
+      <select (change)="onStatusFilter($event)" class="filter-select">
+    <option value="">All Statuses</option>
+    @for (status of statusList(); track status) {
+      <option [value]="status">{{ status }}</option>
+    }
+  </select>
+  
+  <select (change)="onPageSizeChange($event)" class="filter-select">
+    <option [value]="10">10 per page</option>
+    <option [value]="50">50 per page</option>
+    <option [value]="100">100 per page</option>
+    <option [value]="200">200 per page</option>
+    <option [value]="10000">All</option>
+  </select>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="onSort('username')">Username ↕</th>
+          <th (click)="onSort('firstName')">Name ↕</th>
+          <th (click)="onSort('email')">Email ↕</th>
+          <th (click)="onSort('group')">Group ↕</th>
+          <th (click)="onSort('basicSalary')">Salary ↕</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (emp of employees(); track emp.username) {
+          <tr>
+            <td><strong>{{ emp.username }}</strong></td>
+            <td>{{ emp.firstName }} {{ emp.lastName }}</td>
+            <td>{{ emp.email }}</td>
+            <td><span class="badge-group">{{ emp.group }}</span></td>
+            <td>{{ emp.basicSalary | currency:'IDR':'symbol':'1.0-0' }}</td>
+            <td><span class="status-tag" [attr.data-status]="emp.status">{{ emp.status }}</span></td>
+            <td class="actions-cell">
+              <button class="btn-icon view" [routerLink]="['/dashboard/employee/detail', emp.username]" title="View">👁</button>
+              <button class="btn-icon edit" [routerLink]="['/dashboard/employee/edit', emp.username]" title="Edit">✎</button>
+              <button class="btn-icon delete" (click)="onDelete(emp.username)" title="Delete">🗑</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">No employees found matching your criteria.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <span>Showing page {{ store.listState().currentPage }} of {{ store.totalPages() }}</span>
+    <div class="pagination-buttons">
+      <button 
+        [disabled]="store.listState().currentPage === 1"
+        (click)="store.updateState({ currentPage: store.listState().currentPage - 1 })">Previous</button>
+      
+      <button 
+        [disabled]="store.listState().currentPage === store.totalPages()"
+        (click)="store.updateState({ currentPage: store.listState().currentPage + 1 })">Next</button>
+    </div>
+  </div>
+</div>

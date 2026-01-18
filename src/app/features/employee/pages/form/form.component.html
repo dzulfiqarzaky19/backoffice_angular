@@ -69,7 +69,7 @@
         <select id="status" formControlName="status"
                 [class.input-error]="employeeForm.get('status')?.invalid && (employeeForm.get('status')?.dirty || employeeForm.get('status')?.touched)">
           <option value="" disabled>Select Status</option>
-          @for (s of statusesList(); track s) {
+          @for (s of statusList(); track s) {
             <option [value]="s">{{ s }}</option>
           }
         </select>
@@ -83,7 +83,7 @@
         <input id="group" type="text" formControlName="group" list="groupOptions" placeholder="Search group..."
                [class.input-error]="employeeForm.get('group')?.invalid && (employeeForm.get('group')?.dirty || employeeForm.get('group')?.touched)">
         <datalist id="groupOptions">
-          @for (g of groupsList(); track g) {
+          @for (g of groupList(); track g) {
             <option [value]="g">{{ g }}</option>
           }
         </datalist>

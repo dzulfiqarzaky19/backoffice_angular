@@ -18,6 +18,7 @@ export interface EmployeeState {
     pageSize: number;
     searchTermName: string;
     searchTermGroup: string;
+    searchTermStatus: string;
     sortColumn: string;
     sortDirection: 'asc' | 'desc';
 }

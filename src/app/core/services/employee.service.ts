@@ -13,13 +13,13 @@ export class EmployeeService {
     'Product', 'Design', 'Legal', 'Operations', 'Leadership'
   ]);
 
-  readonly groupsList = this.groups.asReadonly();
+  readonly groupList = this.groups.asReadonly();
 
   private readonly statuses = signal<EmployeeStatus[]>([
     'Active', 'Resigned', 'On Leave', 'Terminated'
   ]);
 
-  readonly statusesList = this.statuses.asReadonly();
+  readonly statusList = this.statuses.asReadonly();
 
   constructor() {
     this.generateMockData();
