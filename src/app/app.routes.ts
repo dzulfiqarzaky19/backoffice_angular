@@ -10,6 +10,7 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadComponent: () => import('./layout/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+        canActivate: [authGuard],
         children: [
             // harusnya ini overview, untuk project ini di pakai untuk redirect
             { path: '', redirectTo: 'employee', pathMatch: 'full' },

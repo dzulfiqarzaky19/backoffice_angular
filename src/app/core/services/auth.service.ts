@@ -12,7 +12,7 @@ export class AuthService {
   readonly isLoggedIn = computed(() => !!this.currentUser());
 
   login(username: string, password: string): boolean {
-    if (username && password) {
+    if (username === 'admin' && password === 'admin') {
       this.currentUser.set(username);
       localStorage.setItem('user_session', username);
       this.router.navigate(['/dashboard']);
