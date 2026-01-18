@@ -25,4 +25,8 @@ export class ListComponent {
   handleDetail(username: string) {
     this.router.navigate(['dashboard/employee/detail', username])
   }
+
+  handleAdd() {
+    this.router.navigate(['dashboard/employee/add'])
+  }
 }
