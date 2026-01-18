@@ -15,12 +15,17 @@ export class EmployeeService {
 
   readonly groupsList = this.groups.asReadonly();
 
+  private readonly statuses = signal<EmployeeStatus[]>([
+    'Active', 'Resigned', 'On Leave', 'Terminated'
+  ]);
+
+  readonly statusesList = this.statuses.asReadonly();
+
   constructor() {
     this.generateMockData();
   }
 
   private generateMockData() {
-    const statuses: EmployeeStatus[] = ['Active', 'Resigned', 'On Leave', 'Terminated'];
     const mock: Employee[] = []
 
     for (let i = 1; i <= 105; i++) {
@@ -36,7 +41,7 @@ export class EmployeeService {
         email: `user${i}@example.com`,
         birthDate: randomDate,
         basicSalary: 5000000 + (Math.floor(Math.random() * 50) * 1000000) + (Math.floor(Math.random() * 100) * 1000),
-        status: statuses[Math.floor(Math.random() * statuses.length)],
+        status: this.statuses()[Math.floor(Math.random() * this.statuses().length)],
         group: this.groups()[Math.floor(Math.random() * this.groups().length)],
         description: randomDescDate
       });

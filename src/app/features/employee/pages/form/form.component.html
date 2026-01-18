@@ -1,15 +1,114 @@
-@if(!username()) {
-    <div>add page</div>
-} @else {
-    <div>
-        <p>{{ employee()?.username }}</p>
-        <p>{{ employee()?.firstName }}</p>
-        <p>{{ employee()?.lastName }}</p>
-        <p>{{ employee()?.email }}</p>
-        <p>{{ employee()?.birthDate }}</p>
-        <p>{{ employee()?.basicSalary }}</p>
-        <p>{{ employee()?.status }}</p>
-        <p>{{ employee()?.group }}</p>
-        <p>{{ employee()?.description }}</p>
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ username() ? 'Edit Employee' : 'Add New Employee' }}</h2>
+    <p>Complete the information below to save the employee record.</p>
+  </div>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-grid">
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" placeholder="e.g. jdoe123"
+               [class.input-error]="employeeForm.get('username')?.invalid && (employeeForm.get('username')?.dirty || employeeForm.get('username')?.touched)">
+        @if (employeeForm.get('username')?.invalid && (employeeForm.get('username')?.dirty || employeeForm.get('username')?.touched)) {
+          <small class="error-text">Username is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" formControlName="email" placeholder="name@company.com"
+               [class.input-error]="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)">
+        @if (employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)) {
+          <div class="error-container">
+            @if (employeeForm.get('email')?.errors?.['required']) { <small class="error-text">Email is required</small> }
+            @if (employeeForm.get('email')?.errors?.['email']) { <small class="error-text">Invalid email format</small> }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" formControlName="firstName"
+               [class.input-error]="employeeForm.get('firstName')?.invalid && (employeeForm.get('firstName')?.dirty || employeeForm.get('firstName')?.touched)">
+        @if (employeeForm.get('firstName')?.invalid && (employeeForm.get('firstName')?.dirty || employeeForm.get('firstName')?.touched)) {
+           <small class="error-text">First name is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" formControlName="lastName"
+               [class.input-error]="employeeForm.get('lastName')?.invalid && (employeeForm.get('lastName')?.dirty || employeeForm.get('lastName')?.touched)">
+        @if (employeeForm.get('lastName')?.invalid && (employeeForm.get('lastName')?.dirty || employeeForm.get('lastName')?.touched)) {
+           <small class="error-text">Last name is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="birthDate">Birth Date</label>
+        <input id="birthDate" type="date" formControlName="birthDate"
+               [class.input-error]="employeeForm.get('birthDate')?.invalid && (employeeForm.get('birthDate')?.dirty || employeeForm.get('birthDate')?.touched)">
+        @if (employeeForm.get('birthDate')?.invalid && (employeeForm.get('birthDate')?.dirty || employeeForm.get('birthDate')?.touched)) {
+          <small class="error-text">Please enter a valid birth date</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="basicSalary">Basic Salary (IDR)</label>
+        <input id="basicSalary" type="number" formControlName="basicSalary"
+               [class.input-error]="employeeForm.get('basicSalary')?.invalid && (employeeForm.get('basicSalary')?.dirty || employeeForm.get('basicSalary')?.touched)">
+        @if (employeeForm.get('basicSalary')?.invalid && (employeeForm.get('basicSalary')?.dirty || employeeForm.get('basicSalary')?.touched)) {
+          <small class="error-text">Minimum salary is 2.000.000</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status"
+                [class.input-error]="employeeForm.get('status')?.invalid && (employeeForm.get('status')?.dirty || employeeForm.get('status')?.touched)">
+          <option value="" disabled>Select Status</option>
+          @for (s of statusesList(); track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+        @if (employeeForm.get('status')?.invalid && (employeeForm.get('status')?.dirty || employeeForm.get('status')?.touched)) {
+           <small class="error-text">Status is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="group">Group</label>
+        <input id="group" type="text" formControlName="group" list="groupOptions" placeholder="Search group..."
+               [class.input-error]="employeeForm.get('group')?.invalid && (employeeForm.get('group')?.dirty || employeeForm.get('group')?.touched)">
+        <datalist id="groupOptions">
+          @for (g of groupsList(); track g) {
+            <option [value]="g">{{ g }}</option>
+          }
+        </datalist>
+        @if (employeeForm.get('group')?.invalid && (employeeForm.get('group')?.dirty || employeeForm.get('group')?.touched)) {
+          <small class="error-text">Please select a valid group from the list</small>
+        }
+      </div>
+
+      <div class="form-group full-width">
+        <label for="description">Description Date</label>
+        <input id="description" type="date" formControlName="description"
+               [class.input-error]="employeeForm.get('description')?.invalid && (employeeForm.get('description')?.dirty || employeeForm.get('description')?.touched)">
+        @if (employeeForm.get('description')?.invalid && (employeeForm.get('description')?.dirty || employeeForm.get('description')?.touched)) {
+           <small class="error-text">Description date is required</small>
+        }
+      </div>
     </div>
-}
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="router.navigate(['/dashboard/employee'])">
+        Cancel
+      </button>
+      <button type="submit" class="btn-submit">
+        {{ username() ? 'Update Employee' : 'Create Employee' }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -9,7 +9,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  private fb = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   errorMessage = signal<string | null>(null);
 
@@ -19,7 +19,7 @@ export class LoginComponent {
     }
   }
 
-  loginForm = this.fb.group({
+  loginForm = this.formBuilder.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(3)]]
   });
