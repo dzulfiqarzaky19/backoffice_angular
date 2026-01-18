@@ -1,13 +1,19 @@
 <header class="main-header">
   <div class="header-left">
-    <span class="page-title">Management System</span>
+    <lucide-icon
+      [img]="LayoutDashboard"
+      size="32"
+      strokeWidth="2"
+      color="var(--primary)"
+    ></lucide-icon>
+    <app-typography variant="h3" color="var(--primary)">Management System</app-typography>
   </div>
 
   <div class="header-right">
     <div class="user-profile">
       <div class="user-info">
-        <span class="username">{{ currentUser() }}</span>
-        <span class="role">Administrator</span>
+        <app-typography variant="label">{{ currentUser() }}</app-typography>
+        <app-typography variant="small">Administrator</app-typography>
       </div>
       <div class="user-avatar">
         {{ currentUser()?.charAt(0) }}
@@ -15,8 +21,8 @@
     </div>
 
     <button class="btn-logout" (click)="onLogout()" title="Logout">
-      <span class="logout-icon">⎋</span>
-      Logout
+      <lucide-icon [img]="LogOut" size="18" class="logout-icon"></lucide-icon>
+      <app-typography variant="label" style="color: inherit">Logout</app-typography>
     </button>
   </div>
 </header>

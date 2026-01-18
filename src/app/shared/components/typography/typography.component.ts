@@ -9,6 +9,7 @@ export type TypographyVariant =
   | 'caption'
   | 'label'
   | 'error'
+  | 'small'
   | 'highlight';
 
 @Component({
