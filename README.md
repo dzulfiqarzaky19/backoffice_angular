@@ -1,59 +1,87 @@
-# EmployeeApp
+# Employee Management System (Backoffice Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+This project is an Angular application for managing employee records, including listing, adding, editing, and deleting employees. It features a modern UI with reusable form components and integration tests.
 
-## Development server
+## Prerequisites
 
-To start a local development server, run:
+- **Node.js**: v18 or higher (v23.4.0 detected in development)
+- **npm**: v9 or higher
+- **Google Chrome** or **Chromium**: Required for running tests (Headless mode supported).
+
+## Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone <repository-url>
+    cd backoffice_angular
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+## Development Server
+
+To start the local development server:
+
+```bash
+npm start
+```
+
+Or directly:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Running Tests
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Unit & Integration Tests
 
-```bash
-ng generate component component-name
-```
+This project uses [Karma](https://karma-runner.github.io) and [Jasmine](https://jasmine.github.io/) for unit testing.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To run tests (headless mode recommended for CI/CD or headless environments):
 
 ```bash
-ng generate --help
+npm run test
 ```
+
+**Note for Linux/Headless Environments:**
+If `google-chrome` is not found, you may need to specify the binary path using the `CHROME_BIN` environment variable. For example, if using Chromium:
+
+```bash
+export CHROME_BIN=/usr/bin/chromium-browser && npm run test -- --browsers=ChromeHeadless --watch=false
+```
+
+### Test Features
+
+- **Integration Tests**: `EmployeeDetailComponent` and `FormComponent` are tested using `RouterTestingHarness`.
+- **Form Components**: Reusable components in `shared/components/forms` have dedicated unit tests verifying `ControlValueAccessor` functionality.
 
 ## Building
 
-To build the project run:
+To build the project for production:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Code Formatting
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To ensure consistent code style, run:
 
 ```bash
-ng test
+npm run format
 ```
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `src/app/core/`: Singleton services (e.g., `EmployeeService`, `AuthService`).
+- `src/app/features/`: Feature modules (e.g., `employee`, `auth`).
+- `src/app/shared/`: Shared components (e.g., forms, buttons, typography) and models.
