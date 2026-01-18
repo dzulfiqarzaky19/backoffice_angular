@@ -17,6 +17,10 @@ export class LoginComponent {
     if (this.authService.isLoggedIn()) {
       this.authService.logout();
     }
+
+    this.loginForm.valueChanges.subscribe(() => {
+      this.errorMessage.set(null);
+    });
   }
 
   loginForm = this.formBuilder.group({
