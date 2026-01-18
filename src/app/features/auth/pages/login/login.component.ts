@@ -6,7 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   selector: 'app-login',
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);
@@ -21,7 +21,7 @@ export class LoginComponent {
 
   loginForm = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(3)]]
+    password: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   onSubmit() {

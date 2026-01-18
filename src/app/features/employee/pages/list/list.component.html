@@ -5,33 +5,34 @@
   </div>
 
   <div class="table-actions">
-    <input 
-      type="text" 
-      placeholder="Search by name, username or email..." 
+    <input
+      type="text"
+      placeholder="Search by name, username or email..."
       (input)="onSearch($event)"
-      class="search-input">
+      class="search-input"
+    />
 
-      <select (change)="onGroupFilter($event)" class="filter-select">
-    <option value="">All Groups</option>
-    @for (group of groupList(); track group) {
-      <option [value]="group">{{ group }}</option>
-    }
-  </select>
+    <select (change)="onGroupFilter($event)" class="filter-select">
+      <option value="">All Groups</option>
+      @for (group of groupList(); track group) {
+        <option [value]="group">{{ group }}</option>
+      }
+    </select>
 
-      <select (change)="onStatusFilter($event)" class="filter-select">
-    <option value="">All Statuses</option>
-    @for (status of statusList(); track status) {
-      <option [value]="status">{{ status }}</option>
-    }
-  </select>
-  
-  <select (change)="onPageSizeChange($event)" class="filter-select">
-    <option [value]="10">10 per page</option>
-    <option [value]="50">50 per page</option>
-    <option [value]="100">100 per page</option>
-    <option [value]="200">200 per page</option>
-    <option [value]="10000">All</option>
-  </select>
+    <select (change)="onStatusFilter($event)" class="filter-select">
+      <option value="">All Statuses</option>
+      @for (status of statusList(); track status) {
+        <option [value]="status">{{ status }}</option>
+      }
+    </select>
+
+    <select (change)="onPageSizeChange($event)" class="filter-select">
+      <option [value]="10">10 per page</option>
+      <option [value]="50">50 per page</option>
+      <option [value]="100">100 per page</option>
+      <option [value]="200">200 per page</option>
+      <option [value]="10000">All</option>
+    </select>
   </div>
 
   <div class="table-wrapper">
@@ -50,16 +51,36 @@
       <tbody>
         @for (emp of employees(); track emp.username) {
           <tr>
-            <td><strong>{{ emp.username }}</strong></td>
+            <td>
+              <strong>{{ emp.username }}</strong>
+            </td>
             <td>{{ emp.firstName }} {{ emp.lastName }}</td>
             <td>{{ emp.email }}</td>
-            <td><span class="badge-group">{{ emp.group }}</span></td>
-            <td>{{ emp.basicSalary | currency:'IDR':'symbol':'1.0-0' }}</td>
-            <td><span class="status-tag" [attr.data-status]="emp.status">{{ emp.status }}</span></td>
+            <td>
+              <span class="badge-group">{{ emp.group }}</span>
+            </td>
+            <td>{{ emp.basicSalary | currency: 'IDR' : 'symbol' : '1.0-0' }}</td>
+            <td>
+              <span class="status-tag" [attr.data-status]="emp.status">{{ emp.status }}</span>
+            </td>
             <td class="actions-cell">
-              <button class="btn-icon view" [routerLink]="['/dashboard/employee/detail', emp.username]" title="View">👁</button>
-              <button class="btn-icon edit" [routerLink]="['/dashboard/employee/edit', emp.username]" title="Edit">✎</button>
-              <button class="btn-icon delete" (click)="onDelete(emp.username)" title="Delete">🗑</button>
+              <button
+                class="btn-icon view"
+                [routerLink]="['/dashboard/employee/detail', emp.username]"
+                title="View"
+              >
+                👁
+              </button>
+              <button
+                class="btn-icon edit"
+                [routerLink]="['/dashboard/employee/edit', emp.username]"
+                title="Edit"
+              >
+                ✎
+              </button>
+              <button class="btn-icon delete" (click)="onDelete(emp.username)" title="Delete">
+                🗑
+              </button>
             </td>
           </tr>
         } @empty {
@@ -74,13 +95,19 @@
   <div class="pagination">
     <span>Showing page {{ store.listState().currentPage }} of {{ store.totalPages() }}</span>
     <div class="pagination-buttons">
-      <button 
+      <button
         [disabled]="store.listState().currentPage === 1"
-        (click)="store.updateState({ currentPage: store.listState().currentPage - 1 })">Previous</button>
-      
-      <button 
+        (click)="store.updateState({ currentPage: store.listState().currentPage - 1 })"
+      >
+        Previous
+      </button>
+
+      <button
         [disabled]="store.listState().currentPage === store.totalPages()"
-        (click)="store.updateState({ currentPage: store.listState().currentPage + 1 })">Next</button>
+        (click)="store.updateState({ currentPage: store.listState().currentPage + 1 })"
+      >
+        Next
+      </button>
     </div>
   </div>
 </div>

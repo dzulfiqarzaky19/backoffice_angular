@@ -35,7 +35,8 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input, select {
+input,
+select {
   padding: 0.625rem;
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
@@ -85,7 +86,7 @@ input:disabled {
   cursor: pointer;
 }
 
-input.ng-invalid.ng-dirty, 
+input.ng-invalid.ng-dirty,
 select.ng-invalid.ng-dirty {
   border-color: #dc2626;
   background-color: #fffafb;

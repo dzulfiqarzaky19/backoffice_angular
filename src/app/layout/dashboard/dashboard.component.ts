@@ -6,8 +6,6 @@ import { HeaderComponent } from '../../shared/components/header/header.component
   selector: 'app-dashboard',
   imports: [RouterOutlet, HeaderComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
-
-}
+export class DashboardComponent {}

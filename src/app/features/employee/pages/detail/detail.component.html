@@ -1,16 +1,60 @@
-@if(employee()) {
-    <div>
-        <p>{{ employee()?.username }}</p>
-        <p>{{ employee()?.firstName }}</p>
-        <p>{{ employee()?.lastName }}</p>
-        <p>{{ employee()?.email }}</p>
-        <p>{{ employee()?.birthDate }}</p>
-        <p>{{ employee()?.basicSalary }}</p>
-        <p>{{ employee()?.status }}</p>
-        <p>{{ employee()?.group }}</p>
-        <p>{{ employee()?.description }}</p>
+<div class="detail-container">
+  <div class="detail-header">
+    <button class="btn-back" [routerLink]="['/dashboard/employee']">← Back to List</button>
+    <div class="header-actions">
+      <button class="btn-edit" [routerLink]="['/dashboard/employee/edit', employee()?.username]">
+        Edit Profile
+      </button>
     </div>
-} @else {
-    <p>Employee not found</p>
-}
+  </div>
 
+  @if (employee(); as emp) {
+    <div class="profile-card">
+      <div class="profile-sidebar">
+        <div class="avatar-placeholder">{{ emp.firstName[0] }}{{ emp.lastName[0] }}</div>
+        <h3>{{ emp.firstName }} {{ emp.lastName }}</h3>
+        <span class="status-badge" [attr.data-status]="emp.status">{{ emp.status }}</span>
+      </div>
+
+      <div class="profile-info">
+        <section>
+          <h4>Personal Information</h4>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Username</label>
+              <p>{{ emp.username }}</p>
+            </div>
+            <div class="info-item">
+              <label>Email</label>
+              <p>{{ emp.email }}</p>
+            </div>
+            <div class="info-item">
+              <label>Birth Date</label>
+              <p>{{ emp.birthDate | date: 'mediumDate' }}</p>
+            </div>
+          </div>
+        </section>
+
+        <hr />
+
+        <section>
+          <h4>Employment Details</h4>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Group / Department</label>
+              <p>{{ emp.group }}</p>
+            </div>
+            <div class="info-item">
+              <label>Basic Salary</label>
+              <p>{{ emp.basicSalary | currency: 'IDR' : 'symbol' : '1.0-0' }}</p>
+            </div>
+            <div class="info-item">
+              <label>Effective Date (Description)</label>
+              <p>{{ emp.description | date: 'medium' }}</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</div>

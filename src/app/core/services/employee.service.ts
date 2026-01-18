@@ -1,22 +1,38 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Employee, EmployeeGroup, EmployeeState, EmployeeStatus } from '../../shared/models/employee.model';
+import {
+  Employee,
+  EmployeeGroup,
+  EmployeeState,
+  EmployeeStatus,
+} from '../../shared/models/employee.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeeService {
-  private employees = signal<Employee[]>([])
+  private employees = signal<Employee[]>([]);
   readonly allEmployees = this.employees.asReadonly();
 
   private readonly groups = signal<EmployeeGroup[]>([
-    'Engineering', 'HR', 'Finance', 'Marketing', 'Sales',
-    'Product', 'Design', 'Legal', 'Operations', 'Leadership'
+    'Engineering',
+    'HR',
+    'Finance',
+    'Marketing',
+    'Sales',
+    'Product',
+    'Design',
+    'Legal',
+    'Operations',
+    'Leadership',
   ]);
 
   readonly groupList = this.groups.asReadonly();
 
   private readonly statuses = signal<EmployeeStatus[]>([
-    'Active', 'Resigned', 'On Leave', 'Terminated'
+    'Active',
+    'Resigned',
+    'On Leave',
+    'Terminated',
   ]);
 
   readonly statusList = this.statuses.asReadonly();
@@ -26,7 +42,7 @@ export class EmployeeService {
   }
 
   private generateMockData() {
-    const mock: Employee[] = []
+    const mock: Employee[] = [];
 
     for (let i = 1; i <= 105; i++) {
       const randomDate = new Date();
@@ -40,10 +56,13 @@ export class EmployeeService {
         lastName: `Last${i}`,
         email: `user${i}@example.com`,
         birthDate: randomDate,
-        basicSalary: 5000000 + (Math.floor(Math.random() * 50) * 1000000) + (Math.floor(Math.random() * 100) * 1000),
+        basicSalary:
+          5000000 +
+          Math.floor(Math.random() * 50) * 1000000 +
+          Math.floor(Math.random() * 100) * 1000,
         status: this.statuses()[Math.floor(Math.random() * this.statuses().length)],
         group: this.groups()[Math.floor(Math.random() * this.groups().length)],
-        description: randomDescDate
+        description: randomDescDate,
       });
     }
 
@@ -51,22 +70,20 @@ export class EmployeeService {
   }
 
   addEmployee(newEmp: Employee): void {
-    this.employees.update(list => [newEmp, ...list]);
+    this.employees.update((list) => [newEmp, ...list]);
   }
 
   getEmployeeByUsername(username: string): Employee | undefined {
-    return this.employees().find(e => e.username === username);
+    return this.employees().find((e) => e.username === username);
   }
 
   updateEmployee(username: string, updatedData: Employee): void {
-    this.employees.update(list =>
-      list.map(emp => emp.username === username ? updatedData : emp)
+    this.employees.update((list) =>
+      list.map((emp) => (emp.username === username ? updatedData : emp)),
     );
   }
 
   deleteEmployee(username: string): void {
-    this.employees.update(list =>
-      list.filter(emp => emp.username !== username)
-    );
+    this.employees.update((list) => list.filter((emp) => emp.username !== username));
   }
 }

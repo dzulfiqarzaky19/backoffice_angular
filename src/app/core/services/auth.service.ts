@@ -2,12 +2,12 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private readonly router = inject(Router);
 
-  private readonly currentUser = signal<string | null>(localStorage.getItem('user_session'))
+  private readonly currentUser = signal<string | null>(localStorage.getItem('user_session'));
 
   readonly isLoggedIn = computed(() => !!this.currentUser());
 
@@ -16,9 +16,9 @@ export class AuthService {
       this.currentUser.set(username);
       localStorage.setItem('user_session', username);
       this.router.navigate(['/dashboard']);
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   logout(): void {

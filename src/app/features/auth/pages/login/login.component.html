@@ -8,13 +8,14 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="username">Username</label>
-        <input 
+        <input
           id="username"
-          type="text" 
-          formControlName="username" 
+          type="text"
+          formControlName="username"
           placeholder="Enter username"
-          [class.error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-        
+          [class.error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        />
+
         @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
           <small class="error-msg">Username is required</small>
         }
@@ -22,28 +23,31 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input 
+        <input
           id="password"
-          type="password" 
-          formControlName="password" 
+          type="password"
+          formControlName="password"
           placeholder="••••••••"
-          [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-        
-        @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']) {
+          [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        />
+
+        @if (
+          loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']
+        ) {
           <small class="error-msg">Password is required</small>
         }
-        @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']) {
+        @if (
+          loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']
+        ) {
           <small class="error-msg">Password must be at least 3 characters</small>
         }
       </div>
-@if (errorMessage()) {
-  <div class="alert-error">
-    {{ errorMessage() }}
-  </div>
-}
-      <button type="submit" [disabled]="loginForm.invalid" class="btn-login">
-        Sign In
-      </button>
+      @if (errorMessage()) {
+        <div class="alert-error">
+          {{ errorMessage() }}
+        </div>
+      }
+      <button type="submit" [disabled]="loginForm.invalid" class="btn-login">Sign In</button>
     </form>
   </div>
 </div>

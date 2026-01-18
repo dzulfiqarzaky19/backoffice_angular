@@ -8,7 +8,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
   selector: 'app-list',
   imports: [CommonModule, RouterModule, CurrencyPipe],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrl: './list.component.css',
 })
 export class ListComponent {
   private employeeService = inject(EmployeeService);
@@ -40,7 +40,8 @@ export class ListComponent {
 
   onSort(column: string) {
     const current = this.store.listState();
-    const direction = current.sortColumn === column && current.sortDirection === 'asc' ? 'desc' : 'asc';
+    const direction =
+      current.sortColumn === column && current.sortDirection === 'asc' ? 'desc' : 'asc';
     this.store.updateState({ sortColumn: column, sortDirection: direction });
   }
 

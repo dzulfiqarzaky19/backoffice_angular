@@ -1,16 +1,21 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../../../core/services/employee.service';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Employee, EmployeeGroup, EmployeeStatus } from '../../../../shared/models/employee.model';
 import { DatePipe } from '@angular/common';
 
 export function isInListValidator(allowedValues: readonly string[]): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) return null;
-    return allowedValues.includes(control.value)
-      ? null
-      : { notInList: { value: control.value } };
+    return allowedValues.includes(control.value) ? null : { notInList: { value: control.value } };
   };
 }
 
@@ -27,7 +32,7 @@ export function isValidDateValidator(): ValidatorFn {
   imports: [ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class FormComponent {
   formBuilder = inject(FormBuilder);
@@ -37,7 +42,9 @@ export class FormComponent {
   datePipe = inject(DatePipe);
 
   readonly username = computed(() => this.activatedRoute.snapshot.paramMap.get('username'));
-  readonly employee = computed(() => this.employeeService.getEmployeeByUsername(this.username() || ''));
+  readonly employee = computed(() =>
+    this.employeeService.getEmployeeByUsername(this.username() || ''),
+  );
   readonly groupList = this.employeeService.groupList;
   readonly statusList = this.employeeService.statusList;
 
@@ -53,7 +60,7 @@ export class FormComponent {
       this.employeeForm.patchValue({
         ...employee,
         birthDate: this.datePipe.transform(employee.birthDate, 'yyyy-MM-dd'),
-        description: this.datePipe.transform(employee.description, 'yyyy-MM-dd')
+        description: this.datePipe.transform(employee.description, 'yyyy-MM-dd'),
       });
       this.employeeForm.get('username')?.disable();
     });
@@ -68,7 +75,7 @@ export class FormComponent {
     basicSalary: [0, [Validators.required, Validators.min(2000000)]],
     status: ['', [Validators.required, isInListValidator(this.statusList())]],
     group: ['', [Validators.required, isInListValidator(this.groupList())]],
-    description: ['', [Validators.required]]
+    description: ['', [Validators.required]],
   });
 
   onSubmit() {
