@@ -7,6 +7,7 @@ describe('AuthService', () => {
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
+    localStorage.clear();
     const spy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
@@ -17,8 +18,6 @@ describe('AuthService', () => {
     });
     service = TestBed.inject(AuthService);
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-
-    localStorage.clear();
   });
 
   afterEach(() => {

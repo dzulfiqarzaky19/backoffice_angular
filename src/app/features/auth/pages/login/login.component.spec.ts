@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LoginComponent } from './login.component';
 
-// Stub Dashboard Component
 @Component({
   standalone: true,
   template: '',

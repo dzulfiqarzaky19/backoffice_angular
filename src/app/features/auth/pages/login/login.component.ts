@@ -1,14 +1,23 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { TextComponent } from '../../../../shared/components/forms/text/text.component';
+import { PasswordComponent } from '../../../../shared/components/forms/password/password.component';
+import { LucideAngularModule, LayoutDashboard, Info } from 'lucide-angular';
+import { TypographyComponent } from '../../../../shared/components/typography/typography.component';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, ButtonComponent, TextComponent, PasswordComponent, LucideAngularModule, TypographyComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  readonly LayoutDashboard = LayoutDashboard;
+  readonly Info = Info;
+
   private formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   errorMessage = signal<string | null>(null);
