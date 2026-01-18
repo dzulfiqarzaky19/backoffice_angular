@@ -17,8 +17,8 @@ export class NumberComponent implements ControlValueAccessor {
   value: number | null = null;
   disabled = false;
 
-  onChange: (value: number | null) => void = () => { };
-  onTouched: () => void = () => { };
+  onChange: (value: number | null) => void = () => {};
+  onTouched: () => void = () => {};
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {

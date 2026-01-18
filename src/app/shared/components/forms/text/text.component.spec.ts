@@ -14,17 +14,15 @@ describe('TextComponent', () => {
       invalid: false,
       dirty: false,
       touched: false,
-      errors: null
+      errors: null,
     };
 
     await TestBed.configureTestingModule({
       imports: [TextComponent],
-      providers: [
-        { provide: NgControl, useValue: ngControlSpy }
-      ]
+      providers: [{ provide: NgControl, useValue: ngControlSpy }],
     })
       .overrideComponent(TextComponent, {
-        add: { providers: [{ provide: NgControl, useValue: ngControlSpy }] }
+        add: { providers: [{ provide: NgControl, useValue: ngControlSpy }] },
       })
       .compileComponents();
 

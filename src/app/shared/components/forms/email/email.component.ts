@@ -17,8 +17,8 @@ export class EmailComponent implements ControlValueAccessor {
   value = '';
   disabled = false;
 
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
+  onChange: (value: string) => void = () => {};
+  onTouched: () => void = () => {};
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {

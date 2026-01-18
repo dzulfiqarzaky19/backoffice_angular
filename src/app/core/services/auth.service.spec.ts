@@ -11,10 +11,7 @@ describe('AuthService', () => {
     const spy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
-      providers: [
-        AuthService,
-        { provide: Router, useValue: spy }
-      ]
+      providers: [AuthService, { provide: Router, useValue: spy }],
     });
     service = TestBed.inject(AuthService);
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;

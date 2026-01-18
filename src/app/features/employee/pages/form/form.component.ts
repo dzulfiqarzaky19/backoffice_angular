@@ -46,7 +46,7 @@ export function isValidDateValidator(): ValidatorFn {
     SelectComponent,
     SearchComponent,
     ButtonComponent,
-    TypographyComponent
+    TypographyComponent,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',

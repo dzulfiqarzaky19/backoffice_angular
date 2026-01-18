@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
 @Component({ template: '' })
-class DummyComponent { }
+class DummyComponent {}
 
 describe('FormComponent Integration', () => {
   let harness: RouterTestingHarness;
@@ -24,11 +24,11 @@ describe('FormComponent Integration', () => {
         provideRouter([
           { path: 'dashboard/employee/add', component: FormComponent },
           { path: 'dashboard/employee/edit/:username', component: FormComponent },
-          { path: 'dashboard/employee', component: DummyComponent }
+          { path: 'dashboard/employee', component: DummyComponent },
         ]),
         DatePipe,
-        CurrencyPipe
-      ]
+        CurrencyPipe,
+      ],
     }).compileComponents();
 
     employeeService = TestBed.inject(EmployeeService);

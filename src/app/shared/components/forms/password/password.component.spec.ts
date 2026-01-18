@@ -15,17 +15,15 @@ describe('PasswordComponent', () => {
       invalid: false,
       dirty: false,
       touched: false,
-      errors: null
+      errors: null,
     };
 
     await TestBed.configureTestingModule({
       imports: [PasswordComponent, LucideAngularModule],
-      providers: [
-        { provide: NgControl, useValue: ngControlSpy }
-      ]
+      providers: [{ provide: NgControl, useValue: ngControlSpy }],
     })
       .overrideComponent(PasswordComponent, {
-        add: { providers: [{ provide: NgControl, useValue: ngControlSpy }] }
+        add: { providers: [{ provide: NgControl, useValue: ngControlSpy }] },
       })
       .compileComponents();
 

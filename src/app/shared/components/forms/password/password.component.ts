@@ -8,9 +8,8 @@ import { TypographyComponent } from '../../../../shared/components/typography/ty
   standalone: true,
   imports: [ReactiveFormsModule, LucideAngularModule, TypographyComponent],
   templateUrl: './password.component.html',
-  styleUrl: './password.component.css'
+  styleUrl: './password.component.css',
 })
-
 export class PasswordComponent implements ControlValueAccessor {
   readonly Eye = Eye;
   readonly EyeOff = EyeOff;
@@ -25,11 +24,11 @@ export class PasswordComponent implements ControlValueAccessor {
   disabled = false;
 
   togglePassword() {
-    this.showPassword.update(v => !v);
+    this.showPassword.update((v) => !v);
   }
 
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
+  onChange: (value: string) => void = () => {};
+  onTouched: () => void = () => {};
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {

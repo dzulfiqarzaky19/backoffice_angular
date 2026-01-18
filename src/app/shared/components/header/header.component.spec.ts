@@ -11,14 +11,12 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     authServiceSpy = jasmine.createSpyObj('AuthService', ['logout'], {
-      currentUser: signal('testuser')
+      currentUser: signal('testuser'),
     });
 
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [
-        { provide: AuthService, useValue: authServiceSpy }
-      ]
+      providers: [{ provide: AuthService, useValue: authServiceSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);

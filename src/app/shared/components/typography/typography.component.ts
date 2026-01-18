@@ -20,8 +20,8 @@ export type TypographyVariant =
   host: {
     '[class]': 'variantClass()',
     '[style.color]': 'color()',
-    '[style.fontSize]': 'fontSize()'
-  }
+    '[style.fontSize]': 'fontSize()',
+  },
 })
 export class TypographyComponent {
   variant = input<TypographyVariant>('body');
@@ -30,4 +30,3 @@ export class TypographyComponent {
 
   variantClass = computed(() => `typography-${this.variant()}`);
 }
-

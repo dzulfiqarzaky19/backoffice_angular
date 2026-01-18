@@ -8,7 +8,7 @@ import { EmployeeService } from '../../../../core/services/employee.service';
 import { Component } from '@angular/core';
 
 @Component({ template: '' })
-class DummyComponent { }
+class DummyComponent {}
 
 describe('DetailComponent Integration', () => {
   let harness: RouterTestingHarness;
@@ -26,18 +26,21 @@ describe('DetailComponent Integration', () => {
         EmployeeService,
         provideRouter([
           { path: 'dashboard/employee/detail/:username', component: DetailComponent },
-          { path: 'dashboard/employee', component: DummyComponent }
+          { path: 'dashboard/employee', component: DummyComponent },
         ]),
         DatePipe,
-        CurrencyPipe
-      ]
+        CurrencyPipe,
+      ],
     }).compileComponents();
 
     employeeService = TestBed.inject(EmployeeService);
     location = TestBed.inject(Location);
 
     harness = await RouterTestingHarness.create();
-    component = await harness.navigateByUrl(`dashboard/employee/detail/${testUsername}`, DetailComponent);
+    component = await harness.navigateByUrl(
+      `dashboard/employee/detail/${testUsername}`,
+      DetailComponent,
+    );
     fixture = harness.fixture;
     fixture.detectChanges();
   });
@@ -57,8 +60,9 @@ describe('DetailComponent Integration', () => {
     expect(nameElement.nativeElement.textContent).toContain(user?.firstName);
     expect(nameElement.nativeElement.textContent).toContain(user?.lastName);
 
-    const emailEl = fixture.debugElement.queryAll(By.css('.card-body app-typography'))
-      .find(el => el.nativeElement.textContent.includes(user?.email || ''));
+    const emailEl = fixture.debugElement
+      .queryAll(By.css('.card-body app-typography'))
+      .find((el) => el.nativeElement.textContent.includes(user?.email || ''));
     expect(emailEl).toBeTruthy('Email element should exist');
   });
 

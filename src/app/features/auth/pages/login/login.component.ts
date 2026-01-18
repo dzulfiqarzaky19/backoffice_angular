@@ -10,7 +10,14 @@ import { TypographyComponent } from '../../../../shared/components/typography/ty
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, TextComponent, PasswordComponent, LucideAngularModule, TypographyComponent],
+  imports: [
+    ReactiveFormsModule,
+    ButtonComponent,
+    TextComponent,
+    PasswordComponent,
+    LucideAngularModule,
+    TypographyComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

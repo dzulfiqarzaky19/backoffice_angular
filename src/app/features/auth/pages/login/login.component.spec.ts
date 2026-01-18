@@ -9,9 +9,9 @@ import { LoginComponent } from './login.component';
 @Component({
   standalone: true,
   template: '',
-  selector: 'app-dashboard'
+  selector: 'app-dashboard',
 })
-class DashboardComponent { }
+class DashboardComponent {}
 
 describe('LoginComponent Integration', () => {
   let component: LoginComponent;
@@ -27,9 +27,9 @@ describe('LoginComponent Integration', () => {
         AuthService,
         provideRouter([
           { path: 'login', component: LoginComponent },
-          { path: 'dashboard', component: DashboardComponent }
-        ])
-      ]
+          { path: 'dashboard', component: DashboardComponent },
+        ]),
+      ],
     }).compileComponents();
 
     authService = TestBed.inject(AuthService);

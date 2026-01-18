@@ -8,9 +8,8 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ButtonComponent]
-    })
-      .compileComponents();
+      imports: [ButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
@@ -46,9 +45,9 @@ describe('ButtonComponent', () => {
     @Component({
       template: '<app-button>Click Me</app-button>',
       imports: [ButtonComponent],
-      standalone: true
+      standalone: true,
     })
-    class TestHostComponent { }
+    class TestHostComponent {}
 
     const hostFixture = TestBed.createComponent(TestHostComponent);
     hostFixture.detectChanges();
