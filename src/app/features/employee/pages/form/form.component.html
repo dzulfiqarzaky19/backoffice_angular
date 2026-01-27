@@ -8,7 +8,7 @@
     >
   </div>
 
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
     <div class="form-grid">
       <app-text-input
         formControlName="username"
@@ -62,7 +62,7 @@
       <app-button
         type="submit"
         variant="primary"
-        [disabled]="employeeForm.invalid && employeeForm.submitted"
+        [disabled]="employeeForm.invalid && formDir.submitted"
       >
         {{ username() ? 'Update Employee' : 'Create Employee' }}
       </app-button>
